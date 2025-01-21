@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client - Beer Prices</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #shorting-banner {
+            display: none;
+            background-color: #ff4444;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Bandeau Shorting -->
+    <div id="shorting-banner">
+        SHORT EN COURS, RESTE <span id="countdown"></span> SECONDES
+    </div>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Beer Menu</h1>
+        <table class="table table-dark table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Beer Name</th>
+                    <th>Current Price (€)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for beer in beers %}
+                <tr>
+                    <td>{{ beer.name }}</td>
+                    <td>{{ beer.current_price | round(2) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Rafraîchissement automatique toutes les 5 minutes
+        setInterval(() => {
+            location.reload();
+        }, 300000);
+
+        // Gestion du bandeau pour le shorting
+        const shortingStatus = {{ shorting_status | tojson }};
+        const banner = document.getElementById('shorting-banner');
+        const countdown = document.getElementById('countdown');
+
+        if (shortingStatus.is_active) {
+            banner.style.display = 'block';
+            const endTime = shortingStatus.end_time * 1000; // Convertir en ms
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const timeLeft = Math.max(0, Math.floor((endTime - now) / 1000));
+                countdown.textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    banner.style.display = 'none';
+                }
+            }
+
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+        }
+    </script>
+</body>
+</html>

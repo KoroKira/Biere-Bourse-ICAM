@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bourse des Bières</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center">Bourse des Bières 🍺</h1>
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr class="table-dark">
+                    <th>Nom</th>
+                    <th>Prix Min (€)</th>
+                    <th>Prix Max (€)</th>
+                    <th>Prix Actuel (€)</th>
+                    <th>Consommation</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="beer-table">
+                {% for beer in beers %}
+                <tr>
+                    <td>{{ beer.name }}</td>
+                    <td>{{ beer.min_price }}</td>
+                    <td>{{ beer.max_price }}</td>
+                    <td id="price-{{ beer.name }}">{{ beer.current_price }}</td>
+                    <td id="consumed-{{ beer.name }}">{{ beer.consumed }}</td>
+                    <td>
+                        <button class="btn btn-primary consume-btn" data-name="{{ beer.name }}">+1 Consommée</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button id="reset-btn" class="btn btn-danger mt-4">Réinitialiser</button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Consommer une bière
+            $(".consume-btn").click(function () {
+                const beerName = $(this).data("name");
+                $.ajax({
+                    url: "/consume",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ name: beerName }),
+                    success: function (response) {
+                        const beers = response.data;
+                        beers.forEach(beer => {
+                            $(`#price-${beer.name}`).text(beer.current_price.toFixed(2));
+                            $(`#consumed-${beer.name}`).text(beer.consumed);
+                        });
+                    }
+                });
+            });
+
+            // Réinitialiser les données
+            $("#reset-btn").click(function () {
+                $.ajax({
+                    url: "/reset",
+                    type: "POST",
+                    success: function (response) {
+                        const beers = response.data;
+                        beers.forEach(beer => {
+                            $(`#price-${beer.name}`).text(beer.current_price.toFixed(2));
+                            $(`#consumed-${beer.name}`).text(beer.consumed);
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
