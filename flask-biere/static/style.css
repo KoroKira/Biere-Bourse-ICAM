@@ -1,0 +1,66 @@
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #00ff7f;
+    text-shadow: 0 0 10px #00ff7f;
+    margin-bottom: 20px;
+}
+
+/* Chart Container */
+canvas {
+    box-shadow: 0 0 15px rgba(0, 255, 127, 0.6), 0 0 20px rgba(0, 255, 127, 0.4);
+    border-radius: 10px;
+    background-color: #1e1e1e;
+    padding: 10px;
+}
+
+/* Button (optional if you add controls) */
+button {
+    background-color: #00ff7f;
+    border: none;
+    color: #121212;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #00e676;
+    box-shadow: 0 0 10px #00ff7f;
+}
+
+button:active {
+    background-color: #00c853;
+}
+
+/* Tooltip Styling for Chart.js */
+.chartjs-tooltip {
+    background: rgba(30, 30, 30, 0.9);
+    color: #e0e0e0;
+    border: 1px solid #00ff7f;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.4);
+}
+
+/* Footer or Additional Info */
+footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #757575;
+}
