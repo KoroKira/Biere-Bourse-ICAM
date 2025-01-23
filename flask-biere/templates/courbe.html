@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="container my-5">
-        <h1 class="text-center">Baradis X Codicam</h1>
+        <h1 class="text-center">Évolution des Prix des Bières</h1>
         <canvas id="beerChart" width="400" height="200"></canvas>
     </div>
 
@@ -41,11 +41,14 @@
                         position: 'top'
                     },
                     datalabels: {
-                        color: '#FFFFFF', // Blanc
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)', // Rectangle noir semi-transparent
+                        borderRadius: 4, // Angles arrondis
+                        color: '#FFFFFF', // Texte blanc
                         anchor: 'end',
                         align: 'top',
+                        padding: 6, // Espacement autour du texte
                         font: {
-                            size: 16, // Plus grand
+                            size: 16, // Taille du texte
                             weight: 'bold'
                         },
                         formatter: (value) => `${value} €`, // Formate les données comme "x €"

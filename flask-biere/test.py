@@ -14,12 +14,11 @@ SHORTING_FILE = 'shorting.json'
 def load_data():
     if not os.path.exists(DATA_FILE):
         return [
-            {"name": "IPA", "min_price": 2.0, "max_price": 8.0, "current_price": 5.0, "consumed": 0},
-            {"name": "Stout", "min_price": 2.0, "max_price": 9.0, "current_price": 6.0, "consumed": 0},
-            {"name": "Lager", "min_price": 2.0, "max_price": 7.0, "current_price": 4.5, "consumed": 0},
-            {"name": "Pale Ale", "min_price": 2.0, "max_price": 8.5, "current_price": 5.5, "consumed": 0},
-            {"name": "Pilsner", "min_price": 2.0, "max_price": 7.5, "current_price": 5.0, "consumed": 0},
-            {"name": "Wheat Beer", "min_price": 2.0, "max_price": 6.0, "current_price": 4.0, "consumed": 0},
+            {"name": "Queue Charrue", "min_price": 2.0, "max_price": 8.0, "current_price": 5.0, "consumed": 0},
+            {"name": "Slash", "min_price": 2.0, "max_price": 9.0, "current_price": 6.0, "consumed": 0},
+            {"name": "Bleu", "min_price": 2.0, "max_price": 7.0, "current_price": 4.5, "consumed": 0},
+            {"name": "Bière des Dieux", "min_price": 2.0, "max_price": 8.5, "current_price": 5.5, "consumed": 0},
+            {"name": "Rose", "min_price": 2.0, "max_price": 7.5, "current_price": 5.0, "consumed": 0},
         ]
     with open(DATA_FILE, 'r') as file:
         return json.load(file)
@@ -328,7 +327,7 @@ app.config['SHORTING_ANIMATION'] = False
 # Do the same for other routes like client, serveur, etc.
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
 
 
 #if __name__ == '__main__':
