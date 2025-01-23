@@ -10,6 +10,8 @@
     
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js DataLabels Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 </head>
 <body>
     <div class="container my-5">
@@ -37,6 +39,19 @@
                 plugins: {
                     legend: {
                         position: 'top'
+                    },
+                    datalabels: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)', // Rectangle noir semi-transparent
+                        borderRadius: 4, // Angles arrondis
+                        color: '#FFFFFF', // Texte blanc
+                        anchor: 'end',
+                        align: 'top',
+                        padding: 6, // Espacement autour du texte
+                        font: {
+                            size: 16, // Taille du texte
+                            weight: 'bold'
+                        },
+                        formatter: (value) => `${value} €`, // Formate les données comme "x €"
                     }
                 },
                 scales: {
@@ -54,7 +69,8 @@
                         min: 0
                     }
                 }
-            }
+            },
+            plugins: [ChartDataLabels] // Activation du plugin DataLabels
         });
     </script>
 
@@ -62,7 +78,7 @@
         // Rafraîchissement automatique toutes les 5 minutes
         setInterval(() => {
             location.reload();
-        }, 10000);
+        }, 300000);
     </script>
 
 </body>
