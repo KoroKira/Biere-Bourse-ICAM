@@ -15,7 +15,7 @@ def load_data():
     if not os.path.exists(DATA_FILE):
         return [
             {"name": "Queue Charrue", "min_price": 2.0, "max_price": 8.0, "current_price": 2.5, "consumed": 0},
-            {"name": "Slash", "min_price": 2.1, "max_price": 9.0, "current_price": 2.5, "consumed": 0},
+            {"name": "Slash", "min_price": 2.0, "max_price": 9.0, "current_price": 2.5, "consumed": 0},
             {"name": "Bleu", "min_price": 1.5, "max_price": 7.0, "current_price": 2, "consumed": 0},
             {"name": "Bière des Dieux", "min_price": 2.7, "max_price": 8.5, "current_price": 3, "consumed": 0},
             {"name": "Rose", "min_price": 1.5, "max_price": 7.5, "current_price": 2.0, "consumed": 0},
@@ -327,7 +327,7 @@ app.config['SHORTING_ANIMATION'] = False
 # Do the same for other routes like client, serveur, etc.
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
 
 
 #if __name__ == '__main__':
