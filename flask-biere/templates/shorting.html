@@ -57,12 +57,17 @@
             </tbody>
         </table>
     </div>
+    <form action="/reset" method="post">
+        <button type="submit">Reset</button>
+    </form>
+
+    <script>
+        // Rafraîchissement automatique toutes les 5 minutes
+        setInterval(() => {
+            location.reload();
+        }, 30000);
+    </script>
+
 </body>
 </html>
 
-<!--
-
-A faire: bouton de RESET qui mettra toute les données à 0 en terme de conso etc... ==> reset propre
-
-
--->
